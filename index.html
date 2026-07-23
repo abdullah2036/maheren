@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>مؤسسة الماهرين — البوابة</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-page="entrance">
+  <div id="boot"></div>
+  <div class="scene scene--entrance" aria-hidden="true"></div>
+  <div class="lamp" style="bottom:6vh; inset-inline-start:8vw" aria-hidden="true"></div>
+  <div class="lamp" style="bottom:10vh; inset-inline-end:6vw; animation-delay:1.6s" aria-hidden="true"></div>
+  <div class="firefly" style="top:60vh; inset-inline-start:20vw" aria-hidden="true"></div>
+  <div class="firefly" style="top:70vh; inset-inline-end:25vw; animation-delay:3s" aria-hidden="true"></div>
+  <div class="firefly" style="top:45vh; inset-inline-start:55vw; animation-delay:5s" aria-hidden="true"></div>
+  <div class="vignette" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- بوابة الدخول -->
+  <main class="gatehouse">
+    <h1 id="site-title">مؤسسة الماهرين</h1>
+    <p class="sub" id="site-sub">صرحٌ عائليّ يجمع مشاريعنا الصغيرة الجميلة</p>
+    <button class="enter-btn" id="enter">ادخل القاعة</button>
+    <button class="admin-trigger-btn" id="admin-trigger">مكتب المدير 🔐</button>
+    <p class="hint">PRESS CTRL+ALT+M FOR MANAGER'S OFFICE</p>
+    <a class="scroll-hint" href="#news" aria-label="تابع النزول">⌄</a>
+  </main>
+
+  <!-- آخر الأخبار -->
+  <section class="section" id="news" aria-labelledby="news-h">
+    <h2 id="news-h">آخر الأخبار</h2>
+    <p class="lead">جديد الأبواب والمشاريع في المؤسسة</p>
+    <div class="news-grid" id="news-grid"></div>
+  </section>
+
+  <!-- عن المؤسسة -->
+  <section class="section" id="about" aria-labelledby="about-h">
+    <h2 id="about-h">عن المؤسسة</h2>
+    <div class="about-scroll" id="about-text"></div>
+  </section>
+
+  <!-- مكتب الاستقبال -->
+  <section class="section" id="reception" aria-labelledby="reception-h">
+    <h2 id="reception-h">مكتب الاستقبال</h2>
+    <p class="lead">اكتب اسمك ورسالتك وستنتقل مباشرة إلى واتساب المؤسسة</p>
+    <form class="contact-card" id="contact-form">
+      <label for="c-name">الاسم</label>
+      <input id="c-name" required autocomplete="name" placeholder="مثال: ماهر">
+      <label for="c-msg">رسالتك</label>
+      <textarea id="c-msg" required placeholder="مثال: مرحبًا، أرغب بالانضمام إلى المؤسسة"></textarea>
+      <div class="modal-actions">
+        <button type="submit" class="btn-primary">إرسال عبر واتساب 💬</button>
+      </div>
+      <p class="form-status" id="contact-status"></p>
+    </form>
+  </section>
+
+  <!-- نافذة كلمة مرور غرفة المدير (منسّقة على هوية الموقع) -->
+  <div id="admin-modal" class="modal-overlay" hidden>
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="admin-modal-h">
+      <h3 id="admin-modal-h">🗝 دخول غرفة المدير</h3>
+      <form id="admin-form">
+        <input type="password" id="admin-pass" placeholder="كلمة المرور" required autocomplete="current-password">
+        <div class="modal-actions">
+          <button type="submit" class="btn-primary">دخول</button>
+          <button type="button" id="close-admin-modal" class="btn-secondary">إلغاء</button>
+        </div>
+        <p id="admin-error" class="error-msg" hidden>كلمة المرور غير صحيحة!</p>
+      </form>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

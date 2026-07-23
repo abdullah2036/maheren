@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>القاعة الكبرى — مؤسسة الماهرين</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-page="hall">
+  <div class="scene scene--hall" aria-hidden="true"></div>
+  <div class="lamp" style="top:4vh; inset-inline-start:12vw" aria-hidden="true"></div>
+  <div class="lamp" style="top:6vh; inset-inline-end:10vw; animation-delay:2s" aria-hidden="true"></div>
+  <div class="vignette" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="hall-head">
+    <h1 id="hall-title"></h1>
+    <p id="hall-sub"></p>
+  </header>
+
+  <!-- لوحات الإحصاءات فقط (قسم الأعضاء أُلغي) -->
+  <section class="plaques" id="plaques" aria-label="لوحات المؤسسة"></section>
+  <section id="doors" aria-label="أبواب القطاعات"></section>
+
+  <footer>
+    <p style="margin-bottom:.8rem">
+      <a href="index.html" class="btn-secondary" style="text-decoration:none; padding:.45rem 1.4rem; border-radius:8px; display:inline-block">🏰 العودة إلى الصفحة الرئيسية</a>
+    </p>
+    <span id="footer-text"></span>
+    <button id="secret-key" title="؟" aria-label="مكتب المدير">🗝</button>
+  </footer>
+
+  <div id="portal" role="dialog" aria-modal="true" aria-labelledby="portal-title">
+    <div class="portal-frame">
+      <div class="portal-bar">
+        <h3 id="portal-title"></h3>
+        <button id="portal-newtab">فتح في تبويب جديد ↗</button>
+        <button id="portal-close">إغلاق ✕</button>
+      </div>
+      <iframe id="portal-frame" title="معاينة الموقع" src="about:blank"></iframe>
+      <div class="portal-note">
+        إن ظهرت المعاينة فارغة فالموقع يمنع التضمين — استخدم «فتح في تبويب جديد».
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

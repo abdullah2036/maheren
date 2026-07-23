@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>مكتب المدير — 2004</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-page="admin">
+  <div class="scene scene--office" aria-hidden="true"></div>
+  <div class="lamp" style="top:10vh; inset-inline-end:14vw" aria-hidden="true"></div>
+  <div class="vignette" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <main class="office">
+    <h1>مكتب المدير — 2004</h1>
+    <p>انقر على الشاشة لتشغيل لوحة التحكم</p>
+    <div class="crt" id="crt" role="button" tabindex="0" aria-label="تشغيل لوحة التحكم">
+      <div class="shell">
+        <div class="screen"><span>MAHEREEN&nbsp;OS<br>&gt; click to log in_</span></div>
+      </div>
+      <div class="stand"></div>
+    </div>
+    <p><a href="hall.html">↩ العودة إلى القاعة</a> &nbsp;•&nbsp; <a href="index.html">🏰 الصفحة الرئيسية</a></p>
+  </main>
+
+  <div id="xp">
+    <div class="xp-window">
+      <div class="xp-title">
+        <span>🗔 لوحة تحكم مؤسسة الماهرين</span><span class="sp"></span>
+        <button class="xp-btn min" id="xp-close2" title="تصغير">—</button>
+        <button class="xp-btn" id="xp-close" title="إغلاق">✕</button>
+      </div>
+      <div class="xp-body">
+        <div class="xp-tabs" role="tablist">
+          <button role="tab" aria-selected="true"  data-pane="doors">الأبواب</button>
+          <button role="tab" aria-selected="false" data-pane="texts">النصوص والإحصاءات</button>
+          <button role="tab" aria-selected="false" data-pane="bg">الخلفيات</button>
+          <button role="tab" aria-selected="false" data-pane="io">حفظ / استيراد</button>
+        </div>
+
+        <!-- تبويب الأبواب -->
+        <div class="xp-pane on" id="pane-doors">
+          <div id="door-list"></div>
+          <div class="xp-actions">
+            <button class="xp-push" id="add-door">＋ إضافة باب</button>
+          </div>
+        </div>
+
+        <!-- تبويب النصوص -->
+        <div class="xp-pane" id="pane-texts">
+          <label>اسم المؤسسة</label><input id="f-title">
+          <label>الوصف تحت العنوان</label><input id="f-sub">
+          <label>نص التذييل</label><input id="f-footer">
+          <label>نبذة «عن المؤسسة» (الصفحة الرئيسية)</label>
+          <textarea id="f-about"></textarea>
+          <label>الأخبار — سطر لكل خبر بصيغة: التاريخ | العنوان | النص</label>
+          <textarea id="f-news"></textarea>
+          <label>رقم واتساب مكتب الاستقبال (دولي بلا + مثل 9665XXXXXXXX)</label>
+          <input id="f-contact" dir="ltr" placeholder="9665XXXXXXXX">
+          <label>معرّف عدّاد الزوّار (اجعله فريدًا، مثل نطاق موقعك)</label>
+          <input id="f-counter" dir="ltr" placeholder="mahereen-foundation">
+          <label>كلمة مرور غرفة المدير</label><input id="f-pass" dir="ltr">
+          <label>طريقة فتح الأبواب</label>
+          <select id="f-openmode">
+            <option value="modal">داخل نافذة (iframe) مع خيار تبويب جديد</option>
+            <option value="tab">تبويب جديد مباشرة</option>
+          </select>
+          <label>الإحصاءات — سطر لكل لوحة بصيغة: العنوان | القيمة</label>
+          <textarea id="f-stats"></textarea>
+        </div>
+
+        <!-- تبويب الخلفيات -->
+        <div class="xp-pane" id="pane-bg">
+          <p style="margin-bottom:8px">اختر لكل صفحة: المشهد الافتراضي، لونًا صافيًا،
+             أو صورة من جهازك (تُصغَّر تلقائيًا وتُحفظ في المتصفح، وتُعرض دائمًا
+             بملء الشاشة دون تشويه).</p>
+          <div id="bg-list"></div>
+        </div>
+
+        <!-- تبويب الحفظ -->
+        <div class="xp-pane" id="pane-io">
+          <h4>🚀 نشر تلقائي إلى GitHub (موصى به)</h4>
+          <p>بدل التصدير اليدوي: زر واحد يرفع config.json إلى مستودعك مباشرة،
+             وGitHub Pages يعيد النشر تلقائيًا خلال دقيقة تقريبًا.
+             تحتاج مرة واحدة إنشاء رمز وصول من GitHub:
+             Settings ← Developer settings ← Fine-grained tokens ← Generate،
+             واختَر مستودع الموقع فقط وصلاحية Contents: Read and write.</p>
+          <label>المستودع (المالك/الاسم مثل mahereen/mahereen.github.io)</label>
+          <input id="p-repo" dir="ltr" placeholder="owner/repo">
+          <label>الفرع</label>
+          <input id="p-branch" dir="ltr" placeholder="main">
+          <label>رمز الوصول (يبقى في متصفحك فقط ولا يُصدَّر أبدًا)</label>
+          <input id="p-token" dir="ltr" type="password" placeholder="github_pat_...">
+          <div class="xp-actions">
+            <button class="xp-push primary" id="btn-publish">🚀 نشر التحديثات الآن</button>
+          </div>
+          <hr style="margin:14px 0">
+          <h4>الطريقة اليدوية (احتياط)</h4>
+          <p>التغييرات تُحفظ تلقائيًا في <em>متصفحك أنت فقط</em> (localStorage).
+             لتعميمها يدويًا: «تصدير config.json» ثم ضع الملف بجانب index.html
+             في المستودع وارفعه.</p>
+          <div class="xp-actions">
+            <button class="xp-push" id="btn-export">⬇ تصدير config.json</button>
+            <button class="xp-push" onclick="document.getElementById('file-import').click()">⬆ استيراد JSON</button>
+            <input type="file" id="file-import" accept=".json" hidden>
+            <button class="xp-push" id="btn-reset">↺ استعادة الافتراضي</button>
+          </div>
+        </div>
+
+        <div class="xp-actions" style="padding:10px 14px">
+          <button class="xp-push primary" id="btn-save">💾 حفظ الآن</button>
+          <a class="xp-push" href="hall.html" style="text-decoration:none; color:inherit">🚪 معاينة القاعة</a>
+          <a class="xp-push" href="index.html" style="text-decoration:none; color:inherit">🏰 معاينة المدخل</a>
+        </div>
+        <div class="xp-statusbar" id="xp-status">جاهز.</div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+  <script>
+  /* ---------- تحقق + قراءة config.json المنشور قبل أي شيء ---------- */
+  let cfg;
+  (async function init(){
+    await MF.loadRemote();
+    if (sessionStorage.getItem('admin_authed') !== 'true'){
+      const input = prompt('أدخل كلمة مرور غرفة المدير:');
+      if (checkAdminPass(input))
+        sessionStorage.setItem('admin_authed', 'true');
+      else return location.replace('index.html');
+    }
+    cfg = MF.get();
+  })();
+  const SOUNDS = { creak:'صرير خشبي', chime:'رنين نحاسي', click:'نقرة', none:'صامت' };
+  const PAGES = { entrance:'صفحة المدخل', hall:'القاعة الكبرى', office:'مكتب المدير' };
+  const status = m => qs('#xp-status').textContent = m;
+
+  /* ---------- حفظ تلقائي (مع تجميع التغييرات المتتالية) ---------- */
+  let saveTimer;
+  function persist(msg = '💾 حُفظ تلقائيًا.'){
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(() => {
+      try { MF.save(cfg); status(msg); }
+      catch { status('✖ تعذّر الحفظ — مساحة المتصفح ممتلئة، جرّب صورة أصغر.'); }
+    }, 350);
+  }
+
+  /* ---------- فتح/إغلاق النافذة والتبويبات ---------- */
+  const openXP = () => { cfg ||= MF.get(); SFX.play('chime'); qs('#xp').classList.add('open'); renderAll(); };
+  qs('#crt').addEventListener('click', openXP);
+  qs('#crt').addEventListener('keydown', e => { if (e.key === 'Enter') openXP(); });
+  const closeXP = () => qs('#xp').classList.remove('open');
+  qs('#xp-close').addEventListener('click', closeXP);
+  qs('#xp-close2').addEventListener('click', closeXP);
+
+  document.querySelectorAll('.xp-tabs [role="tab"]').forEach(t =>
+    t.addEventListener('click', () => {
+      SFX.play('click');
+      document.querySelectorAll('.xp-tabs [role="tab"]').forEach(x => x.setAttribute('aria-selected', x === t));
+      document.querySelectorAll('.xp-pane').forEach(p => p.classList.toggle('on', p.id === 'pane-' + t.dataset.pane));
+    }));
+
+  /* ---------- الأبواب ---------- */
+  function doorCard(d, i, fresh = false){
+    const card = el('div', 'door-card' + (fresh ? ' fresh' : ''));
+    card.innerHTML = `
+      <div class="grid">
+        <div><label>الاسم</label><input data-k="title" value="${d.title||''}"></div>
+        <div><label>الرابط الخارجي</label><input dir="ltr" data-k="url" value="${d.url||''}"></div>
+        <div><label>الأيقونة (رمز/إيموجي)</label><input data-k="icon" value="${d.icon||''}"></div>
+        <div><label>لون الوهج</label><input type="color" data-k="tint" value="${d.tint||'#c9a24b'}"></div>
+        <div><label>صوت الفتح</label>
+          <select data-k="sound">${Object.entries(SOUNDS).map(([v,l]) =>
+            `<option value="${v}" ${d.sound===v?'selected':''}>${l}</option>`).join('')}</select></div>
+        <div><label>الوصف</label><input data-k="desc" value="${d.desc||''}"></div>
+      </div>
+      <div class="tools">
+        <button class="xp-push" data-act="test">🔊 تجربة الصوت</button>
+        <button class="xp-push" data-act="up" ${i===0?'disabled':''}>▲</button>
+        <button class="xp-push" data-act="down" ${i===cfg.doors.length-1?'disabled':''}>▼</button>
+        <button class="xp-push" data-act="del">🗑 حذف</button>
+      </div>`;
+    /* كل تعديل حقل يُحدَّث في الإعدادات ويُحفَظ فورًا */
+    card.querySelectorAll('[data-k]').forEach(inp =>
+      inp.addEventListener('input', () => { d[inp.dataset.k] = inp.value; persist(); }));
+    card.querySelector('[data-act="test"]').onclick = () => SFX.play(d.sound);
+    card.querySelector('[data-act="up"]').onclick   = () => move(i, -1);
+    card.querySelector('[data-act="down"]').onclick = () => move(i, +1);
+    card.querySelector('[data-act="del"]').onclick  = () => {
+      if (confirm(`حذف «${d.title}»؟`)) { cfg.doors.splice(i,1); renderDoors(); persist('🗑 حُذف الباب وحُفظ.'); }
+    };
+    return card;
+  }
+  function renderDoors(){
+    const list = qs('#door-list'); list.innerHTML = '';
+    cfg.doors.forEach((d, i) => list.appendChild(doorCard(d, i)));
+  }
+  function move(i, dir){
+    const [d] = cfg.doors.splice(i, 1);
+    cfg.doors.splice(i + dir, 0, d);
+    renderDoors(); persist('↕ أُعيد الترتيب وحُفظ.');
+  }
+  /* إضافة باب: بطاقة جاهزة فورًا، تُبرَز وتُركَّز، وتُحفظ مباشرة */
+  qs('#add-door').addEventListener('click', () => {
+    SFX.play('click');
+    cfg.doors.push({ id:'d'+Date.now(), title:'باب جديد', desc:'', url:'https://example.org',
+                     icon:'✦', tint:'#c9a24b', sound:'creak' });
+    renderDoors();
+    const last = qs('#door-list').lastElementChild;
+    last.classList.add('fresh');
+    last.scrollIntoView({ behavior:'smooth', block:'center' });
+    const t = last.querySelector('[data-k="title"]'); t.focus(); t.select();
+    persist('＋ أُضيف باب جديد وحُفظ.');
+  });
+
+  /* ---------- الخلفيات ---------- */
+  function bgCard(key){
+    const bg = cfg.backgrounds[key];
+    const card = el('div', 'bg-card');
+    card.innerHTML = `
+      <h4>${PAGES[key]}</h4>
+      <div class="row">
+        <div><label>النوع</label>
+          <select data-b="type">
+            <option value="default" ${bg.type==='default'?'selected':''}>المشهد الافتراضي</option>
+            <option value="color"   ${bg.type==='color'?'selected':''}>لون صافٍ</option>
+            <option value="image"   ${bg.type==='image'?'selected':''}>صورة مخصّصة</option>
+          </select></div>
+        <div><label>اللون</label><input type="color" data-b="color" value="${bg.color||'#14100c'}"></div>
+        <div><label>رفع صورة</label><input type="file" data-b="file" accept="image/*"></div>
+        <div class="bg-preview" style="${bg.image?`background-image:url(${bg.image})`:''}"></div>
+        <div><button class="xp-push" data-b="clear" ${bg.image?'':'disabled'}>🗑 إزالة الصورة</button></div>
+      </div>`;
+    card.querySelector('[data-b="type"]').addEventListener('change', e => {
+      bg.type = e.target.value; persist();
+    });
+    card.querySelector('[data-b="color"]').addEventListener('input', e => {
+      bg.color = e.target.value; bg.type = 'color';
+      card.querySelector('[data-b="type"]').value = 'color'; persist();
+    });
+    card.querySelector('[data-b="file"]').addEventListener('change', e => {
+      const f = e.target.files[0]; if (!f) return;
+      status('⏳ جارٍ معالجة الصورة...');
+      shrinkImage(f, dataURL => {
+        bg.image = dataURL; bg.type = 'image';
+        card.querySelector('[data-b="type"]').value = 'image';
+        card.querySelector('.bg-preview').style.backgroundImage = `url(${dataURL})`;
+        card.querySelector('[data-b="clear"]').disabled = false;
+        persist('🖼 حُفظت صورة الخلفية.');
+      });
+    });
+    card.querySelector('[data-b="clear"]').addEventListener('click', () => {
+      bg.image = ''; bg.type = 'default';
+      renderBackgrounds(); persist('🗑 أُزيلت الصورة وعاد المشهد الافتراضي.');
+    });
+    return card;
+  }
+  function renderBackgrounds(){
+    const list = qs('#bg-list'); list.innerHTML = '';
+    Object.keys(PAGES).forEach(k => list.appendChild(bgCard(k)));
+  }
+  /* تصغير الصورة قبل التخزين كي لا تمتلئ مساحة localStorage (~5MB) */
+  function shrinkImage(file, done, maxW = 1600){
+    const img = new Image();
+    img.onload = () => {
+      const scale = Math.min(1, maxW / img.width);
+      const cv = document.createElement('canvas');
+      cv.width = Math.round(img.width * scale);
+      cv.height = Math.round(img.height * scale);
+      cv.getContext('2d').drawImage(img, 0, 0, cv.width, cv.height);
+      done(cv.toDataURL('image/jpeg', .8));
+      URL.revokeObjectURL(img.src);
+    };
+    img.src = URL.createObjectURL(file);
+  }
+
+  /* ---------- النصوص ---------- */
+  function renderTexts(){
+    qs('#f-title').value   = cfg.site.title;
+    qs('#f-sub').value     = cfg.site.subtitle;
+    qs('#f-footer').value  = cfg.site.footer;
+    qs('#f-about').value   = cfg.site.about || '';
+    qs('#f-contact').value = cfg.site.whatsapp || '';
+    qs('#f-counter').value = cfg.site.counterNs || '';
+    qs('#f-pass').value    = cfg.adminPassword || '1234';
+    qs('#f-openmode').value = cfg.settings.openMode;
+    qs('#f-news').value  = (cfg.news||[]).map(n => `${n.date} | ${n.title} | ${n.text}`).join('\n');
+    qs('#f-stats').value = cfg.stats.map(s => `${s.label} | ${s.value}`).join('\n');
+  }
+  function collectTexts(){
+    cfg.site.title    = qs('#f-title').value.trim();
+    cfg.site.subtitle = qs('#f-sub').value.trim();
+    cfg.site.footer   = qs('#f-footer').value.trim();
+    cfg.site.about    = qs('#f-about').value;
+    cfg.site.whatsapp = qs('#f-contact').value.replace(/\D/g, '');
+    cfg.site.counterNs = qs('#f-counter').value.trim() || 'mahereen-foundation';
+    cfg.adminPassword = qs('#f-pass').value.trim() || '1234';
+    cfg.settings.openMode = qs('#f-openmode').value;
+    cfg.news = qs('#f-news').value.split('\n').filter(Boolean).map(l => {
+      const [date='', title='', ...rest] = l.split('|');
+      return { date:date.trim(), title:title.trim(), text:rest.join('|').trim() };
+    });
+    cfg.stats = qs('#f-stats').value.split('\n').filter(Boolean).map(l => {
+      const [label, value=''] = l.split('|'); return { label:label.trim(), value:value.trim() };
+    });
+  }
+  /* حفظ تلقائي لحقول تبويب النصوص أيضًا */
+  ['f-title','f-sub','f-footer','f-about','f-contact','f-counter','f-pass','f-openmode','f-news','f-stats']
+    .forEach(id => qs('#'+id).addEventListener('input', () => { collectTexts(); persist(); }));
+
+  function renderAll(){ renderDoors(); renderTexts(); renderBackgrounds(); loadPublishFields(); }
+
+  /* ---------- نشر تلقائي: رفع config.json إلى GitHub مباشرة ----------
+     إعدادات النشر (المستودع/الفرع/الرمز) تُحفظ في مفتاح مستقل في هذا
+     المتصفح فقط، ولا تدخل أبدًا في config.json المُصدَّر أو المنشور. */
+  const PUB_KEY = 'MF_PUBLISH';
+  function loadPublishFields(){
+    try {
+      const p = JSON.parse(localStorage.getItem(PUB_KEY)) || {};
+      qs('#p-repo').value = p.repo || '';
+      qs('#p-branch').value = p.branch || 'main';
+      qs('#p-token').value = p.token || '';
+    } catch {}
+  }
+  qs('#btn-publish').addEventListener('click', async () => {
+    const repo = qs('#p-repo').value.trim();
+    const branch = qs('#p-branch').value.trim() || 'main';
+    const token = qs('#p-token').value.trim();
+    if (!repo.includes('/') || !token){ status('✖ أدخل المستودع بصيغة owner/repo ورمز الوصول أولًا.'); return; }
+    localStorage.setItem(PUB_KEY, JSON.stringify({ repo, branch, token }));
+    collectTexts(); MF.save(cfg);
+    /* JSON عربي ← Base64 مع دعم UTF-8 */
+    const json = JSON.stringify(MF.get(), null, 2);
+    const content = btoa(String.fromCharCode(...new TextEncoder().encode(json)));
+    const api = `https://api.github.com/repos/${repo}/contents/config.json`;
+    const headers = { Authorization: `Bearer ${token}`, Accept: 'application/vnd.github+json' };
+    status('⏳ جارٍ النشر إلى GitHub...');
+    try {
+      let sha;                                   /* لازم عند تعديل ملف موجود */
+      const cur = await fetch(`${api}?ref=${branch}`, { headers });
+      if (cur.ok) sha = (await cur.json()).sha;
+      const res = await fetch(api, {
+        method: 'PUT', headers,
+        body: JSON.stringify({
+          message: 'تحديث إعدادات الموقع من لوحة التحكم',
+          content, branch, ...(sha ? { sha } : {})
+        })
+      });
+      if (!res.ok){
+        const err = await res.json().catch(() => ({}));
+        throw new Error(err.message || ('HTTP ' + res.status));
+      }
+      status('🚀 نُشر بنجاح — سيراه الزوّار خلال دقيقة تقريبًا بعد إعادة نشر Pages.');
+      SFX.play('chime');
+    } catch (err) {
+      status('✖ فشل النشر: ' + err.message + ' — تحقق من المستودع والرمز وصلاحياته.');
+    }
+  });
+
+  /* ---------- حفظ يدوي / تصدير / استيراد ---------- */
+  qs('#btn-save').addEventListener('click', () => {
+    collectTexts();
+    try { MF.save(cfg); SFX.play('chime'); status('✔ حُفظت الإعدادات بنجاح.'); }
+    catch { status('✖ تعذّر الحفظ — مساحة المتصفح ممتلئة، جرّب صورة أصغر.'); }
+  });
+  qs('#btn-export').addEventListener('click', () => { collectTexts(); MF.save(cfg); MF.exportJSON(); });
+  qs('#file-import').addEventListener('change', e => {
+    const f = e.target.files[0]; if (!f) return;
+    MF.importJSON(f, ok => {
+      if (ok) { cfg = MF.get(); renderAll(); status('✔ استُورد الملف بنجاح.'); }
+      else status('✖ ملف غير صالح — تحقق من صيغة JSON.');
+    });
+  });
+  qs('#btn-reset').addEventListener('click', () => {
+    if (confirm('استعادة الإعدادات الافتراضية؟ ستُفقد تعديلاتك.')){
+      MF.reset(); cfg = MF.get(); renderAll(); status('↺ استُعيدت الإعدادات الافتراضية.');
+    }
+  });
+  </script>
+</body>
+</html>
