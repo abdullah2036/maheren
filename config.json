@@ -103,6 +103,15 @@
       "icon": "✦",
       "tint": "#ffd877",
       "sound": "chime"
+    },
+    {
+      "id": "d1784832259634",
+      "title": "رسامة ماهرة",
+      "desc": "لوحات أكريلك بلمسة فنية مميزة",
+      "url": "https://abdullah2036.github.io/artmaher",
+      "icon": "👩‍🎨",
+      "tint": "#f9d3e0",
+      "sound": "chime"
     }
   ]
 }
