@@ -95,6 +95,7 @@
           <div class="xp-actions">
             <button class="xp-push primary" id="btn-publish">🚀 نشر التحديثات الآن</button>
           </div>
+          <p id="publish-msg" style="margin-top:8px; font-weight:600; min-height:1.4em"></p>
           <hr style="margin:14px 0">
           <h4>الطريقة اليدوية (احتياط)</h4>
           <p>التغييرات تُحفظ تلقائيًا في <em>متصفحك أنت فقط</em> (localStorage).
@@ -323,23 +324,52 @@
       qs('#p-token').value = p.token || '';
     } catch {}
   }
+  /* رسالة نشر مرئية بجانب الزر + شريط الحالة معًا */
+  function pubMsg(m, ok){
+    const p = qs('#publish-msg');
+    p.textContent = m; p.style.color = ok ? '#1a7a2e' : '#b23012';
+    status(m);
+  }
+  /* Base64 على دفعات — التحويل القديم كان ينهار بصمت مع الإعدادات الكبيرة
+     (خصوصًا صور الخلفيات) بسبب تجاوز حد المكدس، فيبدو الزر "لا يعمل" */
+  function toB64(str){
+    const bytes = new TextEncoder().encode(str);
+    let bin = '';
+    for (let i = 0; i < bytes.length; i += 0x8000)
+      bin += String.fromCharCode.apply(null, bytes.subarray(i, i + 0x8000));
+    return btoa(bin);
+  }
   qs('#btn-publish').addEventListener('click', async () => {
-    const repo = qs('#p-repo').value.trim();
-    const branch = qs('#p-branch').value.trim() || 'main';
-    const token = qs('#p-token').value.trim();
-    if (!repo.includes('/') || !token){ status('✖ أدخل المستودع بصيغة owner/repo ورمز الوصول أولًا.'); return; }
-    localStorage.setItem(PUB_KEY, JSON.stringify({ repo, branch, token }));
-    collectTexts(); MF.save(cfg);
-    /* JSON عربي ← Base64 مع دعم UTF-8 */
-    const json = JSON.stringify(MF.get(), null, 2);
-    const content = btoa(String.fromCharCode(...new TextEncoder().encode(json)));
-    const api = `https://api.github.com/repos/${repo}/contents/config.json`;
-    const headers = { Authorization: `Bearer ${token}`, Accept: 'application/vnd.github+json' };
-    status('⏳ جارٍ النشر إلى GitHub...');
+    const btn = qs('#btn-publish');
     try {
+      /* قبول رابط كامل أو owner/repo: يُشذَّب تلقائيًا */
+      let repo = qs('#p-repo').value.trim()
+        .replace(/^https?:\/\/(www\.)?github\.com\//, '')
+        .replace(/\.git$/, '').replace(/\/+$/, '');
+      const branch = qs('#p-branch').value.trim() || 'main';
+      const token = qs('#p-token').value.trim();
+      if (!/^[^\/\s]+\/[^\/\s]+$/.test(repo))
+        return pubMsg('✖ صيغة المستودع: owner/repo فقط (مثل mahereen/mahereen.github.io).', false);
+      if (!token)
+        return pubMsg('✖ أدخل رمز الوصول أولًا.', false);
+      qs('#p-repo').value = repo;
+      localStorage.setItem(PUB_KEY, JSON.stringify({ repo, branch, token }));
+      collectTexts(); MF.save(cfg);
+
+      btn.disabled = true; btn.textContent = '⏳ جارٍ النشر...';
+      pubMsg('⏳ جارٍ رفع config.json إلى ' + repo + ' ...', true);
+
+      const content = toB64(JSON.stringify(MF.get(), null, 2));
+      const api = `https://api.github.com/repos/${repo}/contents/config.json`;
+      const headers = { Authorization: `Bearer ${token}`, Accept: 'application/vnd.github+json' };
+
       let sha;                                   /* لازم عند تعديل ملف موجود */
-      const cur = await fetch(`${api}?ref=${branch}`, { headers });
+      const cur = await fetch(`${api}?ref=${encodeURIComponent(branch)}`, { headers });
+      if (cur.status === 401) throw new Error('الرمز مرفوض (401) — أنشئ Fine-grained token بصلاحية Contents: Read and write.');
+      if (cur.status === 404 && !(await fetch(`https://api.github.com/repos/${repo}`, { headers })).ok)
+        throw new Error('المستودع غير موجود أو الرمز لا يشمله (404) — تأكد من owner/repo ومن اختيار المستودع عند إنشاء الرمز.');
       if (cur.ok) sha = (await cur.json()).sha;
+
       const res = await fetch(api, {
         method: 'PUT', headers,
         body: JSON.stringify({
@@ -351,10 +381,12 @@
         const err = await res.json().catch(() => ({}));
         throw new Error(err.message || ('HTTP ' + res.status));
       }
-      status('🚀 نُشر بنجاح — سيراه الزوّار خلال دقيقة تقريبًا بعد إعادة نشر Pages.');
+      pubMsg('🚀 نُشر بنجاح! GitHub Pages سيحدّث الموقع لكل الأجهزة خلال دقيقة تقريبًا.', true);
       SFX.play('chime');
     } catch (err) {
-      status('✖ فشل النشر: ' + err.message + ' — تحقق من المستودع والرمز وصلاحياته.');
+      pubMsg('✖ فشل النشر: ' + err.message, false);
+    } finally {
+      btn.disabled = false; btn.textContent = '🚀 نشر التحديثات الآن';
     }
   });
 
