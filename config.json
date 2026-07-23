@@ -78,21 +78,21 @@
       "sound": "chime"
     },
     {
-      "id": "lit",
-      "title": "راوية ماهرة",
-      "desc": "قصص وخواطر وخطوط عربية",
-      "url": "https://abdullah2036.github.io/eloriaproject/",
-      "icon": "📖",
-      "tint": "#dec0d6",
-      "sound": "chime"
-    },
-    {
       "id": "d1784825588111",
       "title": "صانعة شخصيات ماهرة",
       "desc": "اصنع شخصيتك الماهرة",
       "url": "https://mwdah51.github.io/-character-creator-maher/",
       "icon": "👾",
       "tint": "#eb9bbe",
+      "sound": "chime"
+    },
+    {
+      "id": "lit",
+      "title": "راوية ماهرة",
+      "desc": "قصص وخواطر وخطوط عربية",
+      "url": "https://abdullah2036.github.io/eloriaproject/",
+      "icon": "📖",
+      "tint": "#dec0d6",
       "sound": "chime"
     }
   ]
