@@ -24,7 +24,7 @@
     },
     "office": {
       "type": "color",
-      "color": "#e0dcf5",
+      "color": "#450e59",
       "image": ""
     }
   },
@@ -93,6 +93,15 @@
       "url": "https://abdullah2036.github.io/eloriaproject/",
       "icon": "📖",
       "tint": "#dec0d6",
+      "sound": "chime"
+    },
+    {
+      "id": "d1784827002369",
+      "title": "روضة ماهرة",
+      "desc": "حروف الهجاء بطريقة بسيطة وجميلة",
+      "url": "https://mshaer500000-hash.github.io/ahrof/",
+      "icon": "✦",
+      "tint": "#ffd877",
       "sound": "chime"
     }
   ]
